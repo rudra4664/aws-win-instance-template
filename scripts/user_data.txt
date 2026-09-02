@@ -1,1 +1,9 @@
-
+<powershell>
+if ( -not (Test-Path -Path ($AWSTarget = 'C:\Program Files\Amazon\AWSCLIV2'))) {
+    msiexec /i C:\vsts\IA\aws-nyl-win-srv-apps\AWSCLIV2.msi /qn /log AWSCLIV2.log
+}
+if( $env:Path.Split(";") -notcontains $AWSTarget ) {
+    [Environment]::SetEnvironmentVariable("Path",$env:Path + "$AWSTarget;","Process")
+}
+Write-Host ${test_variable}
+</powershell>
